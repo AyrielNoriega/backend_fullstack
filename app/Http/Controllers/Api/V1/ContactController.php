@@ -1,13 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use  App\Http\Controllers\Controller;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\Contact;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['store']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +27,8 @@ class ContactController extends Controller
      */
     public function store(StoreContactRequest $request)
     {
-        //
+        $contact = Contact::create($request->all());
+        return $contact;
     }
 
     /**
