@@ -28,7 +28,9 @@ class ContactController extends Controller
     public function store(StoreContactRequest $request)
     {
         $contact = Contact::create($request->all());
-        return $contact;
+        $response = new \stdClass;
+        $response->message = 'Information sent';
+        return response()->json($response, 201);
     }
 
     /**
